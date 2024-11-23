@@ -21,6 +21,8 @@ const Player = (name, symbol) => {
 const Game = (() => {
   let currentPlayer = Player('Player 1', '1')
   let gameOver = false
+  let player1Score = 0;
+  let player2Score = 0;
 
   const switchPlayer = () => {
     currentPlayer = (currentPlayer.symbol === '1') ? Player('Player 2', '0') : Player('Player 1', '1')
@@ -47,6 +49,14 @@ const Game = (() => {
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         winnerContainer.textContent = `${currentPlayer.name} wins!`
         gameOver = true
+        if (currentPlayer.symbol === '1') {
+          player1Score++;
+        } else {
+          player2Score++;
+        }
+
+        updateScores()
+        return
       }
     }
 
@@ -54,6 +64,11 @@ const Game = (() => {
       winnerContainer.textContent = `It's a draw!`
       gameOver = true
     }
+  }
+
+  const updateScores = () => {
+    document.querySelector('.p1-score').textContent = `P1 Score: ${player1Score}`;
+    document.querySelector('.p2-score').textContent = `P2 Score: ${player2Score}`;
   }
 
   const isGameOver = () => gameOver
@@ -75,6 +90,7 @@ const Game = (() => {
     getCurrentPlayer,
     setGameOver,
     setCurrentPlayer,
+    updateScores
   };
 })()
 
