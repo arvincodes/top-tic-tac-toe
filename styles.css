@@ -168,10 +168,6 @@ button:hover, header a:hover {
     border: none;
     border-radius: 16px;
   }
-  
-  /* .cell:disabled {
-    background-color: #ccc;
-  } */
 
   .game-over-container {
     margin-top: 16px;
@@ -180,6 +176,10 @@ button:hover, header a:hover {
     justify-content: space-between;
     align-items: center;
     color: #ffffff;
+  }
+
+  .winner-container {
+    color: #7ddfc3;
   }
 
   footer {

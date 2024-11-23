@@ -56,6 +56,7 @@ const Game = (() => {
         }
 
         updateScores()
+
         return
       }
     }
@@ -107,8 +108,8 @@ const renderBoard = () => {
   } else if (board.every(cell => cell === '')) {
     gameStatus.textContent = 'Game not yet started.';
   } else {
-    const currentPlayer = Game.getCurrentPlayer(); // Get the current player
-    gameStatus.textContent = `${currentPlayer.name}'s turn...`; // Dynamically update with the current player's name
+    const currentPlayer = Game.getCurrentPlayer();
+    gameStatus.textContent = `${currentPlayer.name}'s turn...`;
   }
 
   for (let i = 0; i < 9; i++) {
@@ -117,7 +118,7 @@ const renderBoard = () => {
     cell.textContent = board[i]
 
     if (board[i] !== '') {
-      cell.disabled = true; // Disable the cell if it is already occupied
+      cell.disabled = true;
     }
 
     cell.addEventListener('click', () => {
@@ -137,7 +138,7 @@ const renderBoard = () => {
 const resetGame = () => {
   Gameboard.getBoard().fill('');
 
-  Game.setGameOver(false);  // Properly call the setGameOver method
+  Game.setGameOver(false);
   Game.setCurrentPlayer(Player('Player 1', '1'))
 
   const winnerContainer = document.querySelector('.winner-container');
