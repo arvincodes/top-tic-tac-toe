@@ -26,6 +26,7 @@ body {
   padding: 28px;
   font-family: "Inter", sans-serif;
 
+  background-color: #32323c;
   position: relative;
   min-height: 100vh;
   margin: 0;
@@ -64,6 +65,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 0.5rem;
 }
 
+button {
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+button:hover, header a:hover {
+  opacity: 0.7;
+}
+
 @media (min-width: 320px) {
   .container {
     max-width: 320px;
@@ -77,17 +87,35 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 8px;
   }
 
+  header div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  header svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .size-6 {
+    stroke: none;
+    fill: #7ddfc3;
+  }
+
   header h1 {
     font-size: 28px;
+    color: #7ddfc3;
   }
 
   header a {
     text-decoration: none;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #393943;
+    color: #7ddfc3;
     padding: 2px 10px;
     border-radius: 6px;
     font-size: 14px;
+    transition: 0.4s;
   }
 
   section {
@@ -96,23 +124,9 @@ h1, h2, h3, h4, h5, h6 {
 
   .tagline {
     text-align: center;
-    font-size: 16px;
-    margin-bottom: 28px;
-  }
-
-  .choose-sign-container {
-    margin: 8px 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
     font-size: 14px;
-  }
-
-  .choice {
-    padding: 2px 12px;
-    border: 1px solid black;
-    border-radius: 6px;
+    margin: 16px 0 28px 0;
+    color: #ffffff;
   }
 
   .stats-container {
@@ -120,13 +134,14 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     align-items: end;
     font-size: 14px;
+    color: #ffffff;
   }
 
   .stats-container button {
-    padding: 2px 10px;
+    padding: 2px 12px;
     font-size: 14px;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #393943;
+    color: #7ddfc3;
     border: none;
     border-radius: 6px;
   }
@@ -146,12 +161,12 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color: #000000;
+    background-color: #393943;
     color: #ffffff;
     font-family: "Inter", sans-serif;
     font-weight: 900;
     border: none;
-    border-radius: 8px;
+    border-radius: 16px;
   }
   
   .cell:disabled {
@@ -164,6 +179,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 14px;
     justify-content: space-between;
     align-items: center;
+    color: #ffffff;
   }
 
   footer {
@@ -175,7 +191,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     padding: 16px 0;
     text-align: center;
-    color: #000000;
+    color: #ffffff;
   }
 }
 
@@ -197,15 +213,3 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 48px;
   }
 }
-/* 
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-} */
