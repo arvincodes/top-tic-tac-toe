@@ -40,13 +40,15 @@ const Game = (() => {
 
     const board = Gameboard.getBoard()
 
+    const winnerContainer = document.querySelector('.winner-container')
+
     for (let combination of winningCombinations) {
       const [a, b, c] = combination
 
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        console.log(`${board[a]} wins!`)
+        console.log(`${currentPlayer.name} wins!`)
+        winnerContainer.textContent = `${currentPlayer.name} wins!`
         gameOver = true
-        return
       }
     }
 
@@ -67,8 +69,17 @@ const renderBoard = () => {
   const gameContainer = document.querySelector('.game-container')
   gameContainer.innerHTML = ''
 
+  const gameStatus = document.querySelector('.game-status')
   const board = Gameboard.getBoard()
   const currentPlayer = Game.getCurrentPlayer()
+
+  if (Game.isGameOver()) {
+    gameStatus.textContent = 'Game over!';
+  } else if (board.every(cell => cell === '')) {
+    gameStatus.textContent = 'Game not yet started.';
+  } else {
+    gameStatus.textContent = 'Game ongoing...';
+  }
 
   for (let i = 0; i < 9; i++) {
     const cell = document.createElement('button')
@@ -77,11 +88,10 @@ const renderBoard = () => {
 
     cell.addEventListener('click', () => {
       if (!Game.isGameOver()) {
-        Gameboard.updateCell(i, currentPlayer.symbol) 
-        Game.switchPlayer()
-
-        renderBoard() 
+        Gameboard.updateCell(i, currentPlayer.symbol)   
         Game.checkWinner() 
+        Game.switchPlayer() 
+        renderBoard()
       }
     })
 
@@ -89,4 +99,18 @@ const renderBoard = () => {
   }
 }
 
+
+const resetGame = () => {
+  Gameboard.getBoard().fill('');
+
+  const winnerContainer = document.querySelector('.winner-container');
+  winnerContainer.textContent = '';
+  const gameStatus = document.querySelector('.game-status')
+  gameStatus.textContent = 'Game not yet started.'
+  
+  renderBoard();
+};
+
 renderBoard()
+const resetButton = document.querySelector('.stats-container button')
+resetButton.addEventListener('click', resetGame)
