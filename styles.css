@@ -169,9 +169,9 @@ button:hover, header a:hover {
     border-radius: 16px;
   }
   
-  .cell:disabled {
+  /* .cell:disabled {
     background-color: #ccc;
-  }
+  } */
 
   .game-over-container {
     margin-top: 16px;

@@ -39,21 +39,19 @@ const Game = (() => {
     ]
 
     const board = Gameboard.getBoard()
-
     const winnerContainer = document.querySelector('.winner-container')
 
     for (let combination of winningCombinations) {
       const [a, b, c] = combination
 
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        console.log(`${currentPlayer.name} wins!`)
         winnerContainer.textContent = `${currentPlayer.name} wins!`
         gameOver = true
       }
     }
 
     if (!board.includes('')) {
-      console.log('It\'s a tie!')
+      winnerContainer.textContent = `It's a draw!`
       gameOver = true
     }
   }
@@ -62,7 +60,22 @@ const Game = (() => {
 
   const getCurrentPlayer = () => currentPlayer
 
-  return { switchPlayer, checkWinner, isGameOver, getCurrentPlayer }
+  const setGameOver = (state) => {
+    gameOver = state;
+  };
+
+  const setCurrentPlayer = (player) => {
+    currentPlayer = player;
+  };
+
+  return {
+    switchPlayer,
+    checkWinner,
+    isGameOver,
+    getCurrentPlayer,
+    setGameOver,
+    setCurrentPlayer,
+  };
 })()
 
 const renderBoard = () => {
@@ -78,13 +91,18 @@ const renderBoard = () => {
   } else if (board.every(cell => cell === '')) {
     gameStatus.textContent = 'Game not yet started.';
   } else {
-    gameStatus.textContent = 'Game ongoing...';
+    const currentPlayer = Game.getCurrentPlayer(); // Get the current player
+    gameStatus.textContent = `${currentPlayer.name}'s turn...`; // Dynamically update with the current player's name
   }
 
   for (let i = 0; i < 9; i++) {
     const cell = document.createElement('button')
     cell.classList.add('cell')
     cell.textContent = board[i]
+
+    if (board[i] !== '') {
+      cell.disabled = true; // Disable the cell if it is already occupied
+    }
 
     cell.addEventListener('click', () => {
       if (!Game.isGameOver()) {
@@ -102,6 +120,9 @@ const renderBoard = () => {
 
 const resetGame = () => {
   Gameboard.getBoard().fill('');
+
+  Game.setGameOver(false);  // Properly call the setGameOver method
+  Game.setCurrentPlayer(Player('Player 1', '1'))
 
   const winnerContainer = document.querySelector('.winner-container');
   winnerContainer.textContent = '';
